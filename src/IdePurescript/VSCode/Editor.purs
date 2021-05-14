@@ -18,4 +18,3 @@ identifierAtCursor editor = do
     pos <- getCursorBufferPosition editor
     line <- lineAtPosition doc pos
     pure $ identifierAtPoint line (getCharacter pos)
-

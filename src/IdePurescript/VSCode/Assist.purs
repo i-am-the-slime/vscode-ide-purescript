@@ -1,30 +1,25 @@
-module IdePurescript.VSCode.Assist (caseSplit, addClause, getActivePosInfo, typedHole) where
+module IdePurescript.VSCode.Assist (addTypeclassInstance, caseSplit, addClause, getActivePosInfo, typedHole) where
 
 import Prelude
 
 import Control.Monad.Except (runExcept)
 import Control.Monad.Maybe.Trans (MaybeT(..), runMaybeT)
 import Data.Array (drop, findIndex, uncons, (!!))
-import Data.Array as Array
 import Data.Either (Either(..))
 import Data.Maybe (Maybe(..), maybe)
 import Data.Nullable (toNullable)
 import Data.String (length)
-import Data.Traversable (traverse)
 import Effect (Effect)
-import Effect.Aff (Aff)
 import Effect.Aff.Class (liftAff)
 import Effect.Class (liftEffect)
-import Foreign (Foreign, readArray, readString, unsafeFromForeign, unsafeToForeign)
+import Foreign (Foreign, readString, unsafeFromForeign, unsafeToForeign)
 import IdePurescript.VSCode.Types (launchAffAndRaise)
-import LanguageServer.IdePurescript.Assist (TypoResult(..), decodeTypoResult, encodeTypoResult)
-import LanguageServer.IdePurescript.Commands (cmdName, caseSplitCmd, addClauseCmd)
-import LanguageServer.Types (DocumentUri)
-import LanguageServer.Uri (filenameToUri)
+import LanguageServer.IdePurescript.Commands (addClauseCmd, addTypeclassInstanceCmd, caseSplitCmd, cmdName)
+import LanguageServer.Protocol.Types (DocumentUri)
+import LanguageServer.Protocol.Uri (filenameToUri)
 import PscIde.Command (TypeInfo(..))
 import VSCode.Command (executeAff)
 import VSCode.Input (QuickPickItem, defaultInputOptions, getInput, showQuickPickItemsOpt)
-import VSCode.LanguageClient (LanguageClient, sendCommand)
 import VSCode.Position (Position, getCharacter, getLine, mkPosition)
 import VSCode.Range (Range, mkRange)
 import VSCode.TextDocument (getPath)
@@ -85,3 +80,8 @@ typedHole args = launchAffAndRaise $ void $ do
     { description:  module'
     , detail: type'
     , label: identifier }
+
+addTypeclassInstance :: Effect Unit
+addTypeclassInstance = launchAffAndRaise $ void $ do
+  liftEffect getActivePosInfo >>= maybe (pure unit) \{ pos, uri } -> do
+      executeAff (cmdName addTypeclassInstanceCmd) [ unsafeToForeign uri, unsafeToForeign $ getLine pos, unsafeToForeign $ getCharacter pos ]

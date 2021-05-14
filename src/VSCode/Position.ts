@@ -2,6 +2,6 @@
 
 import { Position } from 'vscode';
 
-export const getLine = (p: Position) => p.line;
-export const getCharacter = (p: Position) => p.character;
-export const mkPosition = (x: number) => (y: number) => new Position(x, y);
+exports.getLine = (p: Position) => p.line;
+exports.getCharacter = (p: Position) => p.character;
+exports.mkPosition = (x: number) => (y: number) => new Position(x, y);

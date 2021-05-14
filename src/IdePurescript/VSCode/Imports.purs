@@ -15,8 +15,8 @@ import IdePurescript.VSCode.Assist (getActivePosInfo)
 import IdePurescript.VSCode.Editor (identifierAtCursor)
 import IdePurescript.VSCode.Types (launchAffAndRaise)
 import LanguageServer.IdePurescript.Commands (addCompletionImport, addModuleImportCmd, cmdName, getAvailableModulesCmd)
-import LanguageServer.Types (Command(..), DocumentUri)
-import LanguageServer.Uri (filenameToUri)
+import LanguageServer.Protocol.Types (Command(..), DocumentUri)
+import LanguageServer.Protocol.Uri (filenameToUri)
 import VSCode.Input (showQuickPick, defaultInputOptions, getInput)
 import VSCode.LanguageClient (LanguageClient, sendCommand)
 import VSCode.TextDocument (getPath)
@@ -25,7 +25,7 @@ import VSCode.Window (getActiveTextEditor)
 
 addIdentImport :: LanguageClient -> Effect Unit
 addIdentImport client = launchAffAndRaise $ void $ do 
-  liftEffect getActivePosInfo >>= maybe (pure unit) \{ pos, uri, ed } -> do
+  liftEffect getActivePosInfo >>= maybe (pure unit) \{ uri, ed } -> do
     atCursor <- liftEffect $ identifierAtCursor ed
     let defaultIdent = maybe "" _.word atCursor
         qual = _.qualifier =<< atCursor

@@ -35,7 +35,7 @@ searchPursuitModules = launchAffAndRaise do
     void $ showQuickPickItems items
 
     where
-    item (PursuitSearchResult { package, info: PursuitSearchInfo { mod }  }) = do
+    item (PursuitSearchResult { package, info: PursuitSearchInfo { mod } }) = do
         pure $
             { description: ""
             , label: fromMaybe "" mod

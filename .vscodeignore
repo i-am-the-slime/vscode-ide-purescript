@@ -4,6 +4,7 @@ out/test/**
 test/**
 src/**
 output/**
+.spago/**
 **/*.map
 .gitignore
 tsconfig.json

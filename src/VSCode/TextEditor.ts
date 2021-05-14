@@ -1,11 +1,11 @@
 import { TextEditor, Range } from 'vscode';
 
-export const setTextImpl = (ed : TextEditor) => (text : string) => (cb: (success: boolean) => () => {}) => () =>
+exports.setTextImpl = (ed : TextEditor) => (text : string) => (cb: (success: boolean) => () => {}) => () =>
     ed.edit(builder => builder.replace(new Range(0, 0, ed.document.lineCount, 0), text))
         .then(s => cb(s)());
 
 
-export const setTextViaDiffImpl  = (ed : TextEditor) => (text : string) => (cb: (success: boolean) => () => {}) => () => {
+exports.setTextViaDiffImpl  = (ed : TextEditor) => (text : string) => (cb: (success: boolean) => () => {}) => () => {
     const oldLines = ed.document.getText().split(/\n/);
     const newLines = text.split(/\n/);
 
@@ -30,8 +30,8 @@ export const setTextViaDiffImpl  = (ed : TextEditor) => (text : string) => (cb: 
 };
 
 
-export const setTextInRangeImpl = (ed : TextEditor) => (text : string) => (range : Range) => (cb: (success: boolean) => () => {}) => () =>
+exports.setTextInRangeImpl = (ed : TextEditor) => (text : string) => (range : Range) => (cb: (success: boolean) => () => {}) => () =>
     ed.edit(builder => builder.replace(range, text))
         .then(s => cb(s)());
 
-export const getDocument = (ed: TextEditor) => ed.document;
+exports.getDocument = (ed: TextEditor) => ed.document;

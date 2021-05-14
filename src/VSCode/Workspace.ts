@@ -1,7 +1,7 @@
 import { workspace, WorkspaceConfiguration } from 'vscode';
 
-export const getConfiguration = (section : string) => () => workspace.getConfiguration(section);
+exports.getConfiguration = (section : string) => () => workspace.getConfiguration(section);
 
-export const getValue = (config : WorkspaceConfiguration) => (key: string) => () => config.get(key);
+exports.getValue = (config : WorkspaceConfiguration) => (key: string) => () => config.get(key);
 
-export const rootPath = () => workspace.rootPath;
+exports.rootPath = () => workspace.rootPath;

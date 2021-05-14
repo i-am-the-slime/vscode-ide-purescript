@@ -8,9 +8,10 @@ import Effect.Uncurried (EffectFn1, mkEffectFn1)
 import Foreign (Foreign)
 import Foreign.Object (Object)
 import Foreign.Object as Object
-import IdePurescript.VSCode.Assist (addClause, caseSplit, typedHole)
+import IdePurescript.VSCode.Assist (addClause, addTypeclassInstance, caseSplit, typedHole)
 import IdePurescript.VSCode.Imports (addIdentImport, addModuleImport)
 import IdePurescript.VSCode.Pursuit (searchPursuit, searchPursuitModules)
+import IdePurescript.VSCode.Spago (installSpagoDependency)
 import VSCode.LanguageClient (LanguageClient, onNotification0)
 import VSCode.Window (setStatusBarMessage)
 
@@ -42,4 +43,6 @@ main = mkEffectFn1 initialise
         , cmdA "typedHole" $ typedHole
         , cmd "searchPursuit" $ searchPursuit
         , cmd "searchPursuitModules" $ searchPursuitModules
+        , cmd "installSpagoDependency" $ installSpagoDependency client
+        , cmd "addTypeclassInstanceInteractive" $ addTypeclassInstance
         ]

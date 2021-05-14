@@ -6,6 +6,7 @@ import Data.Either (Either(..))
 import Data.Nullable (Nullable)
 import Effect (Effect)
 import Effect.Aff (Aff, Error, makeAff, nonCanceler)
+import Effect.Class.Console (log)
 import Foreign (Foreign)
 
 foreign import data LanguageClient :: Type

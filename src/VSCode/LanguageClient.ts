@@ -1,12 +1,13 @@
-import { LanguageClient, ExecuteCommandRequest } from 'vscode-languageclient';
+import { LanguageClient } from 'vscode-languageclient/browser';
+import { ExecuteCommandRequest } from 'vscode-languageclient';
 
-export const sendCommandImpl = (client: LanguageClient) => (command: string) => (args?: any[]) => 
+exports.sendCommandImpl = (client: LanguageClient) => (command: string) => (args?: any[]) => 
     (errCb: (err: Error) => () => {}) => <T>(cb: (arg: T) => () => {}) => () => 
-        client.sendRequest(ExecuteCommandRequest.type, { command, arguments: args }).then(res => {
+        client.sendRequest(ExecuteCommandRequest.type, { command, arguments: args }).then((res: any) => {
             cb(res)();
-        }, err => {
+        }, (err: any) => {
             errCb(err)();
         });
 
-export const onNotification0 = (client: LanguageClient) => (notification: string) => (cb: () => {}) => () =>
+exports.onNotification0 = (client: LanguageClient) => (notification: string) => (cb: () => {}) => () =>
     client.onNotification(notification, cb);
