@@ -20,6 +20,14 @@ This package provides:
 - [x] [Tooltips](#tooltips)
 - [x] [Go to symbol](#go-to-symbol)
 - [x] [Go to definitions](#go-to-definitions)
+- [x] [Build and error reporting](#build-and-error-reporting)
+- [x] Quick-fix support for certain warnings
+- [x] [Autocompletion](#autocomplete)
+- [x] [Type info tooltips](#tooltips)
+- [x] [Go to symbol](#go-to-symbol)
+- [x] [Go to definition](#go-to-definition)
+- [x] [Case split](#case-split)
+- [x] [Add clause](#add-clause)
 - [x] [Pursuit lookup](#pursuit-lookup)
 - [x] [PSCI](#psci)
 
@@ -86,12 +94,21 @@ The following default vscode bindings are helpful for processing build errors:
 
 We will suggest you to add keyboard bindings for commands that you use frequently, which you can do through the menu item `File > Properties > Keyboard Shortcuts`.
 
+<<<<<<< HEAD
 ## Autocomplete
 
 Provided from [`purs ide server`](https://github.com/purescript/purescript/tree/master/psc-ide). Make sure
 your project is built first.
 
 Completions will be sourced from modules imported in the current file.
+=======
+### Access to commands
+
+To see all the commands provided by this package,
+locate the `View > Command palette` in menu and type 'purescript'.
+The contents vary but you'll get something like this.
+
+![command-menu](https://user-images.githubusercontent.com/1215420/89945576-3ab68a00-dc2a-11ea-9486-93db4ef2741a.png)
 
 ## Build and error reporting
 
@@ -99,6 +116,7 @@ After you've added `settings.json` for your build system,
 Shift+Ctrl+B builds it.
 if you are not sure which `settings.json` it is, pick the Spago -one.
 
+<<<<<<< HEAD
 ## Case split
 
 The case split expands the case under the cursor.
@@ -110,6 +128,12 @@ The add clause reads the type declaration under the cursor
 and inserts an empty template under it.
 You can then fill this template.
 This is best in combination with the case split.
+=======
+## Autocomplete
+
+Provided from [`purs ide server`](https://github.com/purescript/purescript/tree/master/psc-ide). Make sure your project is built first.
+
+Completions will be sourced from modules imported in the current file.
 
 ## Tooltips
 
@@ -130,6 +154,23 @@ Hyperclick goto-definition functionality is supported. This is available with `p
 0.9.2 and above, and like tooltips/autocomplete works on identifiers bound at the top level.
 
 In case source positions are not up to date, they may not be updated on rebuild, try rebuilding or restarting psc-ide server.
+
+=======
+ ![demonstration](https://user-images.githubusercontent.com/1215420/99907507-c76eea80-2ce5-11eb-8528-44c965e4abb6.gif)
+
+## Case split
+
+The case split expands the case under the cursor.
+It allows you to auto-complete large case clauses.
+
+ ![demonstration](https://user-images.githubusercontent.com/1215420/99907505-c211a000-2ce5-11eb-98f3-f7955b36f889.gif)
+
+## Add clause
+
+The add clause reads the type declaration under the cursor
+and inserts an empty template.
+
+ ![demonstration](https://user-images.githubusercontent.com/1215420/99907495-b58d4780-2ce5-11eb-8fa4-4d3f6f402560.gif)
 
 ## Pursuit lookup
 
